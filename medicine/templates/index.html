@@ -1,0 +1,396 @@
+<!-- meta tags and other links -->
+ {% load static %}
+{% include 'Header.html' %}
+
+
+<body>
+ 
+  {% include 'sidebar.html' %}
+
+  <main class="dashboard-main">
+    <div class="navbar-header">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-auto">
+          <div class="d-flex flex-wrap align-items-center gap-4">
+            <button type="button" class="sidebar-toggle">
+              <iconify-icon icon="heroicons:bars-3-solid" class="icon text-2xl non-active"></iconify-icon>
+              <iconify-icon icon="iconoir:arrow-right" class="icon text-2xl active"></iconify-icon>
+            </button>
+            <button type="button" class="sidebar-mobile-toggle">
+              <iconify-icon icon="heroicons:bars-3-solid" class="icon"></iconify-icon>
+            </button>
+            <form class="navbar-search">
+              <input type="text" name="search" placeholder="Search">
+              <iconify-icon icon="ion:search-outline" class="icon"></iconify-icon>
+            </form>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="d-flex flex-wrap align-items-center gap-3">
+            <button type="button" data-theme-toggle
+              class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"></button>
+            <div class="dropdown">
+              <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
+                data-bs-toggle="dropdown">
+                <img src="assets/images/user.png" alt="image" class="w-40-px h-40-px object-fit-cover rounded-circle">
+              </button>
+              <div class="dropdown-menu to-top dropdown-menu-sm">
+                <div
+                  class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
+                  <div>
+                    <h6 class="text-lg text-primary-light fw-semibold mb-2">Shaidul Islam</h6>
+                    <span class="text-secondary-light fw-medium text-sm">Admin</span>
+                  </div>
+                  <button type="button" class="hover-text-danger">
+                    <iconify-icon icon="radix-icons:cross-1" class="icon text-xl"></iconify-icon>
+                  </button>
+                </div>
+                <ul class="to-top-list">
+                  <li>
+                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
+                      href="view-profile.html">
+                      <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> My Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
+                      href="email.html">
+                      <iconify-icon icon="tabler:message-check" class="icon text-xl"></iconify-icon> Inbox</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
+                      href="company.html">
+                      <iconify-icon icon="icon-park-outline:setting-two" class="icon text-xl"></iconify-icon>
+                      Setting</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3"
+                      href="javascript:void(0)">
+                      <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon> Log Out</a>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- Profile dropdown end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-main-body">
+
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+        <h6 class="fw-semibold mb-0">Dashboard</h6>
+        <ul class="d-flex align-items-center gap-2">
+          <li class="fw-medium">
+            <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
+              <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
+              Dashboard
+            </a>
+          </li>
+          <li>-</li>
+          <li class="fw-medium">eCommerce</li>
+        </ul>
+      </div>
+
+      <div class="row gy-4">
+        <div class="col-xxl-12">
+          <div class="row gy-4">
+
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-1">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-primary-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
+                        <iconify-icon icon="mdi:medicine" class="menu-icon"></iconify-icon>
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Types of Medicine</span>
+                        <h6 class="fw-semibold">12</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-2">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-success-main flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6">
+                        <iconify-icon icon="mdi:package-variant" class="menu-icon"></iconify-icon>
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Medicine Pack</span>
+                        <h6 class="fw-semibold">250</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-3">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-yellow text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                        <iconify-icon icon="mdi:cart" class="menu-icon"></iconify-icon>
+
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Billings</span>
+                        <h6 class="fw-semibold">30</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-6">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-cyan text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                        <iconify-icon icon="streamline:bag-dollar-solid" class="icon"></iconify-icon>
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Purchase Amount</span>
+                        <h6 class="fw-semibold">₹ 15494</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-2">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-success-main flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6">
+                        <iconify-icon icon="mdi:chart-bar" class="menu-icon"></iconify-icon>
+
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Sale Amount</span>
+                        <h6 class="fw-semibold">₹ 5500</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-6">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-cyan text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                        <iconify-icon icon="mdi:cash" class="menu-icon"></iconify-icon>
+
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Current Product Value</span>
+                        <h6 class="fw-semibold">₹ 11400</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-4">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-primary-600 flex-shrink-0 text-white d-flex justify-content-center align-items-center rounded-circle h6 mb-0">
+                        <iconify-icon icon="mdi:account-tie" class="menu-icon"></iconify-icon>
+
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Employees</span>
+                        <h6 class="fw-semibold">20</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-3 col-sm-6">
+              <div class="card p-3 shadow-2 radius-8 border input-form-light h-100 bg-gradient-end-5">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between gap-1 mb-8">
+
+                    <div class="d-flex align-items-center gap-2">
+                      <span
+                        class="mb-0 w-48-px h-48-px bg-pink text-white flex-shrink-0 d-flex justify-content-center align-items-center rounded-circle h6">
+                        <iconify-icon icon="mingcute:user-follow-fill" class="icon"></iconify-icon>
+                      </span>
+                      <div>
+                        <span class="mb-2 fw-medium text-secondary-light text-sm">Total Customers</span>
+                        <h6 class="fw-semibold">30</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <div class="col-xxl-12 col-md-6">
+          <div class="card h-100">
+            <div class="card-header">
+              <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
+                <h6 class="mb-2 fw-bold text-lg mb-0">Medicine List</h6>
+                <a href="medicine.html" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                  View All
+                  <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <div class="card-body p-24">
+              <div class="table-responsive scroll-sm">
+                <table class="table bordered-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Medicine Name</th>
+                      <th>Pack Size</th>
+                      <th>Unit Price</th>
+                      <th>Total Pack Case</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>ALKATON 250 ml</td>
+                      <td>250 ml</td>
+                      <td>$120</td>
+                      <td>140</td>
+                      <td> <span
+                          class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm">Available</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>KALI COUGH 100 ml</td>
+                      <td>110 ml</td>
+                      <td>$80</td>
+                      <td>0</td>
+                      <td> <span class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium text-sm">Out
+                          of Stock</span> </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xxl-7 col-md-6">
+          <div class="card h-100">
+            <div class="card-header">
+              <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
+                <h6 class="mb-2 fw-bold text-lg mb-0">Latest 5 Medicine Stock</h6>
+                <a href="medicine-stock.html"
+                  class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                  View All
+                  <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <div class="card-body p-24">
+              <div class="table-responsive scroll-sm">
+                <table class="table bordered-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Medicine Name</th>
+                      <th>Total Pack Case</th>
+                      <th>Purchase Price</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>ALKATON 250 ml</td>
+                      <td>30</td>
+                      <td>$100</td>
+                      <td>$3000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-5 col-md-6">
+          <div class="card h-100">
+            <div class="card-header">
+              <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between">
+                <h6 class="mb-2 fw-bold text-lg mb-0">Latest 5 Order</h6>
+                <a href="order.html" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                  View All
+                  <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <div class="card-body p-24">
+              <div class="table-responsive scroll-sm">
+                <table class="table bordered-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Order No</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>ORD-3211</td>
+                      <td>$320</td>
+                      <td> <span
+                          class="bg-warning-focus text-warning-main px-24 py-4 rounded-pill fw-medium text-sm">Pending</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+{% include 'Footer.html' %}
+
+</body>
+
+</html>

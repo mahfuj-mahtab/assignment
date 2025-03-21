@@ -1,0 +1,81 @@
+{% load static %}
+<aside class="sidebar">
+    <button type="button" class="sidebar-close-btn">
+        <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
+    </button>
+    <div>
+        <a href="{% url 'employee-dashboard' %}" class="sidebar-logo">
+            <img src="{% static 'assets/images/logo.png' %}" alt="site logo" class="light-logo">
+        </a>
+    </div>
+    
+    <div class="sidebar-menu-area">
+        <ul class="sidebar-menu" id="sidebar-menu">
+            <li>
+                <a href="{% url 'employee-dashboard' %}">
+                    <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            {% if request.user.role == "ADMIN" %}
+            <li>
+                <a href="employee.html">
+                  <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                  <span>Employees</span>
+                </a>
+              </li>
+              <li>
+                <a href="customer.html">
+                  <iconify-icon icon="fe:users" class="menu-icon"></iconify-icon>
+                  <span>Customers</span>
+                </a>
+              </li>
+              {% endif %}
+              <li class="sidebar-menu-group-title">Product Management</li>
+            {% if request.user.role == "ADMIN" or request.user.role == "MEDICINEMANAGER" %}
+                <li>
+                    <a href="{% url 'category' %}">
+                        <iconify-icon icon="mdi:hospital-box" class="menu-icon"></iconify-icon>
+                        <span>Medicine Category</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'medicine' %}">
+                        <iconify-icon icon="mdi:pill" class="menu-icon"></iconify-icon>
+                        <span>Medicines</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'medicine_stock' %}">
+                        <iconify-icon icon="mdi:warehouse" class="menu-icon"></iconify-icon>
+                        <span>Medicine Stock</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'low_stocks' %}">
+                        <iconify-icon icon="mdi:warning" class="menu-icon"></iconify-icon>
+                        <span>Low Stocks</span>
+                    </a>
+                </li>
+                {% elif request.user.role == "ORDERMANAGER" %}
+                <li>
+                    <a href="{% url 'medicine' %}">
+                        <iconify-icon icon="mdi:pill" class="menu-icon"></iconify-icon>
+                        <span>Medicines</span>
+                    </a>
+                </li>
+                
+             
+            {% endif %}
+            <li class="sidebar-menu-group-title">Order Management</li>
+            {% if request.user.role == "ADMIN" or request.user.role == "ORDERMANAGER" %}
+                <li>
+                    <a href="{% url 'order' %}">
+                        <iconify-icon icon="mdi:cart" class="menu-icon"></iconify-icon>
+                        <span>Orders</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</aside>
