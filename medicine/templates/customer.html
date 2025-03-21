@@ -1,11 +1,8 @@
-<!-- meta tags and other links -->
 {% load static %}
 {% include 'Header.html' %}
 
-
 <body>
- 
-  {% include 'sidebar.html' %}
+    {% include 'sidebar.html' %}
     <main class="dashboard-main">
         <div class="navbar-header">
             <div class="row align-items-center justify-content-between">
@@ -81,14 +78,8 @@
         </div>
         <div class="dashboard-main-body">
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-                <h6 class="fw-semibold mb-0">Order List</h6>
+                <h6 class="fw-semibold mb-0">Customer List</h6>
 
-                {% if request.user.role == "ADMIN" %}
-                <a href="{% url 'add_order'%}" class="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2">
-                    <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
-                    Add New Order
-                </a>
-                {% endif %}
 
 
             </div>
@@ -101,39 +92,35 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table bordered-table mb-0" id="orderTable" data-page-length='10'>
+                    <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
                         <thead>
                             <tr>
-                                <th>Order Number</th>
-                                <th>Customer Name</th>
-                                <th>Customer Email</th>
-                                <th>Medicine Name</th>
-                                <th>Order Amount</th>
-                                <th>Order Date</th>
+                                <th>SL No.</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for order in orders %}
-
+                            {% for customer in customers %}
                             <tr>
-                                <td>{{order.order_no}}</td>
-                                <td>{{order.customer_name}}</td>
-                                <td>{{order.customer_email}}</td>
-                                <td>{{order.medicine_name}}</td>
-                                <td>${{order.order_amount}}</td>
-                                <td>{{order.order_date}}</td>
-                              
+                                <td>{{customer.id}}</td>
+                                <td>{{customer.customer_name}}</td>
+                                <td>{{customer.customer_phone}}</td>
+                                <td>{{customer.email}}</td>
+                                <td>{{customer.customer_address}}</td>
                                 <td>
                                     <a href="#" class="bg-warning-focus text-warning-main px-24 py-4 rounded-pill fw-medium text-sm">Edit</a>
-                                    <a href="{% url 'delete_order' order.id%}" class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium text-sm">Delete</a>
+                                    <a href="{% url 'delete_customer' customer.id %}" class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium text-sm">Delete</a>
                                 </td>
                             </tr>
-                            {% endfor %}
+                            {% endfor%}
                            
-                        </tbody>
+                          
+                        </tbody>                        
                     </table>
-                    
                 </div>
             </div>
         </div>

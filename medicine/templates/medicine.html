@@ -80,11 +80,12 @@
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
                 <h6 class="fw-semibold mb-0">Medicine List</h6>
 
+                {% if request.user.role == "ADMIN" %}
                 <a href="{% url 'add_medicine' %}" class="btn btn-primary text-sm btn-sm px-12 py-12 radius-8 d-flex align-items-center gap-2">
                     <iconify-icon icon="ic:baseline-plus" class="icon text-xl line-height-1"></iconify-icon>
                     Add New Medicine
                 </a>
-
+                {% endif %}
 
             </div>
 
@@ -131,10 +132,12 @@
 
                                     
                                 </td>
+                                {% if request.user.role == 'ADMIN'%}
                                 <td>
                                     <a href="#" class="bg-warning-focus text-warning-main px-24 py-4 rounded-pill fw-medium text-sm">Edit</a>
                                     <a href="{% url 'delete_medicine' medicine.id %}" class="bg-danger-focus text-danger-main px-24 py-4 rounded-pill fw-medium text-sm">Delete</a>
                                 </td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
                             <!-- <tr>

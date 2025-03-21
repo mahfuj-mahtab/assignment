@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .models import *
 from medicineapp.models import *
+import datetime
 # Create your views here.
 def employeeLogin(request):
     if request.method == 'POST':
@@ -10,10 +11,14 @@ def employeeLogin(request):
         password = request.POST['password']
         try:
             existedUser = Employee.objects.get(email = email)
+            print(existedUser.password)
             if(existedUser):
                 user = authenticate(request, username=existedUser.username, password=password)
+                print(user)
                 if user is not None:
+                    print('kk')
                     login(request, user)
+                    print('hh')
                     return redirect('employee-dashboard')
                 else:
                     return render(request,'sign-in.html')
@@ -21,7 +26,38 @@ def employeeLogin(request):
         except Employee.DoesNotExist:
             return render(request,'sign-in.html')
     return render(request,'sign-in.html')
-
+def employeeRegister(request):
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        role = 'ADMIN'
+        password = request.POST['password']
+        
+        employee = Employee(first_name = first_name,last_name = last_name,email = email,phone = 1234567890,role = role,address = '',salary = 15000,image = '',username = email.split('@')[0],password = password)
+        employee.save()
+        return redirect('employee-dashboard')
+    return render(request,'sign-up.html')
+def EditEmployee(request,e_id):
+    if(request.user.is_authenticated):
+        employee = Employee.objects.get(id = e_id)
+        if(request.method == 'POST'):
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            phone = request.POST['phone']
+            role = request.POST['role']
+            image = request.FILES['image']
+            employee.first_name = first_name
+            employee.last_name = last_name
+            employee.email = email
+            employee.phone = phone
+            employee.role = role
+            employee.image = image
+            employee.save()
+            return redirect('employee')
+        return render(request,'edit-employee.html',{'employee' : employee})
+    return render(request,'sign-in.html')
 def employeeDashboard(request):
     if(request.user.is_authenticated):
         return render(request,'index.html')
@@ -99,21 +135,104 @@ def AllOrders(request):
         return render(request,'order.html',{'orders' : orders})
     return render(request,'sign-in.html')
 def AddOrder(request):
+    import random
     if(request.user.is_authenticated):
         if(request.method == 'POST'):
-            order_no = 'abc'
+           
             customer_name = request.POST['customer_name']
             customer_phone = request.POST['customer_phone']
             customer_email = request.POST['customer_email']
             medicine_name = request.POST['medicine_name']
-            total_pack = request.POST['total_pack']
-            order_amount = request.POST['order_amount']
-            order_date = request.POST['order_date']
-            ordered_by = request.POST['ordered_by']
-            new_order = Order(order_no = order_no,customer_name = customer_name,customer_phone = customer_phone,customer_email = customer_email,medicine_name = medicine_name,total_pack = total_pack,order_amount = order_amount,order_date = order_date,ordered_by = ordered_by)
+            total_pack = int(request.POST['total_pack'])
+            
+            ordered_by = request.POST['employee']
+            medicine = Medicine.objects.get(id = medicine_name)
+            employee = Employee.objects.get(id = ordered_by)
+            customer = Customer.objects.filter(email = customer_email).first()
+            if(customer is None):
+                new_customer = Customer(customer_name = customer_name,customer_address = '',email = customer_email,customer_phone = customer_phone)
+                new_customer.save()
+            amount = medicine.unit_price * total_pack
+            num = random.randint(1000,9999)
+            order_no = 'ORD'+str(num)
+            new_order = Order(order_no = order_no,customer_name = customer_name,customer_phone = customer_phone,customer_email = customer_email,medicine_name = medicine,total_pack = total_pack,order_amount = amount,order_date = datetime.datetime.now().date(),ordered_by = employee)
             new_order.save()
             return redirect('order')
         medicine = Medicine.objects.all()
         employee = Employee.objects.all()
         return render(request,'add-order.html',{'medicines' : medicine,'employees' : employee})
+    return render(request,'sign-in.html')
+
+
+def DeleteOrder(request,o_id):
+    if(request.user.is_authenticated):
+        order = Order.objects.get(id = o_id)
+        order.delete()
+        return redirect('order')
+    return render(request,'sign-in.html')
+
+def AllEmployees(request):
+    if(request.user.is_authenticated):
+        employees = Employee.objects.filter()
+        return render(request,'employee.html',{'employees' : employees})
+    return render(request,'sign-in.html')
+def AddEmployee(request):
+    if(request.user.is_authenticated):
+        if(request.method == 'POST'):
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            address = request.POST['address']
+            phone = request.POST['phone']
+            role = request.POST['role']
+            image = request.FILES['image']
+            employee = Employee(first_name = first_name,last_name = last_name,email = email,phone = phone,role = role,address = address,salary = 15000,image = image,username = email.split('@')[0])
+            employee.save()
+            return redirect('employee')
+        return render(request,'add-employee.html')
+    return render(request,'sign-in.html')
+def DeleteEmployee(request,e_id):
+    if(request.user.is_authenticated):
+        employee = Employee.objects.get(id = e_id)
+        employee.delete()
+        return redirect('employee')
+    return render(request,'sign-in.html')
+
+def AllCustomers(request):
+    if(request.user.is_authenticated):
+        customers = Customer.objects.filter()
+        return render(request,'customer.html',{'customers' : customers})
+    return render(request,'sign-in.html')
+def AddCustomer(request):
+    if(request.user.is_authenticated):
+        if(request.method == 'POST'):
+            customer_name = request.POST['customer_name']
+            customer_phone = request.POST['customer_phone']
+            customer_address = request.POST['customer_address']
+            email = request.POST['customer_email']
+            customer = Customer(customer_name = customer_name,customer_address = customer_address,email = email,customer_phone = customer_phone)
+            customer.save()
+            return redirect('customer')
+        return render(request,'add-customer.html')
+    return render(request,'sign-in.html')
+def EditCustomer(request,c_id):
+    if(request.user.is_authenticated):
+        customer = Customer.objects.get(id = c_id)
+        if(request.method == 'POST'):
+            customer_name = request.POST['customer_name']
+            customer_phone = request.POST['customer_phone']
+            customer_address = request.POST['customer_address']
+            email = request.POST['customer_email']
+            customer.customer_name = customer_name
+            customer.customer_phone = customer_phone
+            customer.customer_address = customer_address
+            customer.email = email
+            customer.save()
+            return redirect('customer')
+        return render(request,'edit-customer.html',{'customer':customer})
+def DeleteCustomer(request,c_id):
+    if(request.user.is_authenticated):
+        customer = Customer.objects.get(id = c_id)
+        customer.delete()
+        return redirect('customer')
     return render(request,'sign-in.html')

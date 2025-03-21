@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User,AbstractUser,Group, Permission
+from django.contrib.auth.hashers import make_password
 # Create your models here.
 class Employee(AbstractUser):
     role = (
@@ -15,6 +16,13 @@ class Employee(AbstractUser):
     role = models.CharField(choices=role,max_length=30)
     groups = models.ManyToManyField(Group, related_name="employee_groups", blank=True)
     user_permissions = models.ManyToManyField(Permission, related_name="employee_permissions", blank=True)
+    def save(self, *args, **kwargs):
+        print('password',self.password)
+        if not self.password:
+            self.password = make_password('admin')
+        elif not self.password.startswith('pbkdf2_sha256$'): 
+            self.password = make_password(self.password)
+        super(Employee, self).save(*args, **kwargs)
     def __str__(self):
         return self.username
     

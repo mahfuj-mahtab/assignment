@@ -31,7 +31,7 @@ class Order(models.Model):
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=10)
     customer_email = models.CharField(max_length=100)
-    medicine_name = models.CharField(max_length=100)
+    medicine_name = models.ForeignKey(Medicine,on_delete=models.CASCADE)
     total_pack = models.IntegerField()
     order_amount = models.IntegerField()
     order_date = models.DateField()

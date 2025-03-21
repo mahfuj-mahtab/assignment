@@ -19,13 +19,13 @@
             </li>
             {% if request.user.role == "ADMIN" %}
             <li>
-                <a href="employee.html">
+                <a href="{% url 'employee' %}">
                   <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
                   <span>Employees</span>
                 </a>
               </li>
               <li>
-                <a href="customer.html">
+                <a href="{% url 'customer' %}">
                   <iconify-icon icon="fe:users" class="menu-icon"></iconify-icon>
                   <span>Customers</span>
                 </a>
